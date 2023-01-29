@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+:root {
+    --fade-blue: rgb(0, 129, 167);
+    --fade-green: rgb(0, 175, 185);
+    --bej: rgb(253, 252, 220);
+    --fade-orange: rgb(254, 217, 183);
+    --fade-red: rgb(240, 113, 103);
+}
