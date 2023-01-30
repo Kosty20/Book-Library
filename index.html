@@ -4,12 +4,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Book Shelf</title>
+    <title>The Odin Library</title>
 
     <link rel="stylesheet" href="style.css">
     <script src="code.js" defer></script>
+    <script src="https://kit.fontawesome.com/73284450b7.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
+    <header>
+        <h1>Odin library</h1>
+    </header>
+    <div class="add-book-modal">
+        <form class="add-book-form">
+            <div>New Book</div>
+            <input type="text" id="title-input" placeholder="Title" required>
+            <input type="text" id="author-input" placeholder="Author" required>
+            <input type="number" id="pages-input" placeholder="Pages" required>
+            <label for="read-input" class="check-input">
+                Finished
+                <input type="checkbox" id="read-input">
+                <span class="checkmark"></span>
+            </label>
+            <input type="submit">
+        </form>
+    </div>
+    <main>
+        <button class="add-book">+ Add Book</button>
+        <div class="library-grid">
+            <div class="book-card">
+                <div class="title">Title</div>
+                <div class="author">Author</div>
+                <div class="pages">300</div>
+                <div class="read">Read</div>
+                <div class="remove">Remove</div>
+            </div>
+            <div class="book-card">
+                <div class="title">Title</div>
+                <div class="author">Author</div>
+                <div class="pages">300</div>
+                <div class="read">Read</div>
+                <div class="remove">Remove</div>
+            </div>
+            <div class="book-card">
+                <div class="title">Title</div>
+                <div class="author">Author</div>
+                <div class="pages">300</div>
+                <div class="read">Read</div>
+                <div class="remove">Remove</div>
+            </div>
+            <div class="book-card">
+                <div class="title">Title</div>
+                <div class="author">Author</div>
+                <div class="pages">300</div>
+                <div class="read">Read</div>
+                <div class="remove">Remove</div>
+            </div>
+            <div class="book-card">
+                <div class="title">Title</div>
+                <div class="author">Author</div>
+                <div class="pages">300</div>
+                <div class="read">Read</div>
+                <div class="remove">Remove</div>
+            </div>
+            <div class="book-card">
+                <div class="title">Title</div>
+                <div class="author">Author</div>
+                <div class="pages">300</div>
+                <div class="read">Read</div>
+                <div class="remove">Remove</div>
+            </div>
+            <div class="book-card">
+                <div class="title">Title</div>
+                <div class="author">Author</div>
+                <div class="pages">300</div>
+                <div class="read">Read</div>
+                <div class="remove">Remove</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <span>The Odin Project | 2023 Kosty20 <i class="fa-brands fa-github"></i></span>
+    </footer>
 </body>
 </html>
