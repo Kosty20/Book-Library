@@ -13,7 +13,7 @@ function Book (title, author, pageNum, finished) {
 }
 
 function addNewBook() {
-    library.shift(new Book(
+    library.unshift(new Book(
         titleInput.value, 
         authorInput.value, 
         pagesInput.value, 
