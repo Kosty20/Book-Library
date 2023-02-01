@@ -8,6 +8,7 @@
 
     font-family: 'Poppins';
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -18,18 +19,20 @@
     --fade-red: rgb(240, 113, 103);
     --crayon: rgb(59, 59, 59);
 }
-
 .remove {
     background-color: var(--fade-red);
 }
-
 header,
-.add-book {
+.title,
+.title:after,
+#submit-input {
     background-color: var(--fade-green);
 }
-
 .book-card {
     background-color: var(--fade-orange);
+}
+.add-book {
+    background-color: var(--beige);
 }
 
 body {
@@ -61,20 +64,19 @@ main {
     margin-bottom: 10px;
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--beige);
+    color: var(--crayon);
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
-
-.add-book:hover {
-    filter: brightness(1.1);
+.add-book:active {
+    transform: scale(0.99)
 }
 
 .library-grid {
-    width: clamp(0px, 100%, 1200px);
+    width: clamp(0px, 100%, 1400px);
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -93,32 +95,41 @@ main {
     flex-direction: column;
     align-items: center;
 }
-
 .book-card>div {
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .book-card>div:not(.remove) {
-    padding: 10px;
+    margin: 12px;
     width: fit-content;
     border-bottom: 3px solid var(--beige);
 }
-
 .remove {
-    flex: 1;
-    width: 100%;
+    height: 40px;
+    width: 60%;
+    margin: auto;
     cursor: pointer;
+    border-radius: 10px;
 }
-.remove:hover{
-    filter: brightness(0.9);
+.remove:active {
+    background-color: red;
 }
 
-.title{
+.title {
     width: 100% !important;
-    background-color: var(--fade-green);
+    margin: 0 !important;
+    padding: 10px;
+    color: var(--beige);
+}
+.title:after{
+    content: 'by';
+    position: absolute;
+    bottom: -10px;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: var(--beige);
 }
 
 
@@ -132,7 +143,6 @@ main {
     display: none;
     z-index: 100;
 }
-
 .add-book-modal.active {
     display: flex;
 }
@@ -143,6 +153,7 @@ main {
     margin: auto;
     padding: 20px;
     background-color: var(--fade-blue);
+    border: 5px solid var(--fade-green);
     border-radius: 25px;
     overflow: hidden;
     display: flex;
@@ -150,7 +161,6 @@ main {
     align-items: center;
     justify-content: space-between;
 }
-
 .add-book-form>div {
     width: 100%;
     text-align: center;
@@ -167,8 +177,8 @@ main {
     padding: 5px;
     font-size: 1.2rem;
     color: var(--crayon);
-    border-radius: 10px;
     background-color: var(--beige);
+    border-radius: 10px;
     border: none;
     outline: none;
 }
@@ -179,21 +189,20 @@ main {
     box-shadow: 0 0 0 5px var(--fade-green);
 }
 
-input[type="submit"]{
+input[type="submit"] {
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--beige);
     padding: 5px 30px;
-    background-color: var(--fade-green);
     border: none;
     border-radius: 10px;
     cursor: pointer;
 }
-input[type="submit"]:hover{
-    transform: scale(1.1);
+input[type="submit"]:active {
+    transform: scale(1.05);
 }
 
-/* custom checkmark */
+/* Custom checkmark */
 .check-input {
     cursor: pointer;
     padding: 10px;
@@ -202,9 +211,6 @@ input[type="submit"]:hover{
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--crayon);
-}
-.check-input:hover{
-    box-shadow: 0 0 0 5px var(--fade-green);    
 }
 #read-input {
     position: absolute;
@@ -222,7 +228,7 @@ input[type="submit"]:hover{
     border-radius: 5px;
 }
 .checkmark::after,
-.checkmark::before{
+.checkmark::before {
     content: '';
     position: absolute;
     top: 3px;
@@ -233,19 +239,19 @@ input[type="submit"]:hover{
     border-radius: 5px;
     transform: rotate(-45deg);
 }
-.checkmark::before{
+.checkmark::before {
     transform: rotate(45deg);
 }
-#read-input:checked ~ .checkmark{
+#read-input:checked ~ .checkmark {
     background-color: var(--fade-green);
 }
-#read-input:checked ~ .checkmark:after{
+#read-input:checked ~ .checkmark:after {
     top: 11px;
     left: 7px;
     height: 10px;
-    width: 5px; 
+    width: 5px;
 }
-#read-input:checked ~ .checkmark:before{
+#read-input:checked ~ .checkmark:before {
     top: 2px;
     left: 13px;
     height: 20px;
@@ -265,14 +271,40 @@ footer {
     color: var(--beige);
 }
 
-@media (max-width:1200px){
-    .library-grid{
+
+*::-webkit-scrollbar{
+    background-color: transparent;
+}
+*::-webkit-scrollbar-thumb{
+    background-color: var(--fade-green);
+    border-radius: 50px;
+    border: 3px solid var(--fade-blue);
+}
+*::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+}
+
+
+@media (max-width:1200px) {
+    .library-grid {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media (max-width:600px){
-    .library-grid{
+@media (max-width:600px) {
+    .library-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (hover: hover){
+    .add-book:hover {
+        transform: scale(0.99)
+    }
+    .remove:hover {
+        background-color: red;
+    }
+    input[type="submit"]:hover {
+        transform: scale(1.05);
     }
 }
