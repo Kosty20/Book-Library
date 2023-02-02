@@ -1,6 +1,7 @@
 
 let library = [
-    new Book('Title', 'Author', 300, true)
+    new Book('Title', 'Author', 300, true),
+    new Book('My Title', 'My Author', 200, false)
 ];
 
 function Book (title, author, pageNum, finished) {
@@ -9,13 +10,11 @@ function Book (title, author, pageNum, finished) {
     this.pageNum = pageNum;
     this.isFinished = finished;
 }
-Book.prototype.toggleIsFinished = function (finished) {
-    if (this.isFinished) {
-        this.isFinished = false;
-        finished.innerText = 'Reading';
+Book.prototype.toggleIsFinished = function () {
+    if(this.isFinished){
+        return this.isFinished = false;
     } else {
-        this.isFinished = true;
-        finished.innerText = 'Finished';
+        return this.isFinished = true;
     }
 }
 
@@ -25,8 +24,7 @@ function addNewBook () {
         authorInput.value,
         pagesInput.value,
         readInput.checked
-    )
-    );
+    ));
 }
 
 const addBook = document.querySelector('main>button'),
@@ -79,25 +77,31 @@ function resetInput () {
 const libraryGrid = document.querySelector('.library-grid');
 
 function createAndDisplayCards () {
-    for (book of library) {
+    library.forEach(book => {
         const title = document.createElement('div');
         const author = document.createElement('div');
         const pages = document.createElement('div');
         const finished = document.createElement('div');
         const remove = document.createElement('div');
         const card = document.createElement('div');
+
         title.classList.add('title');
         author.classList.add('author');
         pages.classList.add('pages');
         finished.classList.add('read');
         remove.classList.add('remove');
         card.classList.add('book-card');
+
         title.innerText = book.title;
         author.innerText = book.author;
         pages.innerText = `${book.pageNum} Pages`;
         finished.innerText = book.isFinished ? 'Finished' : 'Reading';
         remove.innerText = 'Remove';
-        finished.onclick = book.toggleIsFinished(finished);
+
+        finished.onclick = () => 
+        book.toggleIsFinished() ? 
+        finished.innerText = 'Finished' : 
+        finished.innerText = 'Reading'
         card.dataset.index = library.length;
         remove.onclick = () => {
             card.remove();
@@ -105,7 +109,11 @@ function createAndDisplayCards () {
         }
         libraryGrid.append(card);
         card.append(title, author, pages, finished, remove);
-    }
+    })
+}
+
+function toggleIsFinished() {
+    
 }
 
 function resetLibrary () {
