@@ -1,8 +1,6 @@
 
 let library = [
-    new Book('area', 'meme', 12, true),
-    new Book('meme', 'Area', 12, false),
-    new Book('Dicks 101', 'Daddy', 12, true)
+    new Book('Title', 'Author', 300, true)
 ];
 
 function Book (title, author, pageNum, finished) {
@@ -11,19 +9,28 @@ function Book (title, author, pageNum, finished) {
     this.pageNum = pageNum;
     this.isFinished = finished;
 }
+Book.prototype.toggleIsFinished = function (finished) {
+    if (this.isFinished) {
+        this.isFinished = false;
+        finished.innerText = 'Reading';
+    } else {
+        this.isFinished = true;
+        finished.innerText = 'Finished';
+    }
+}
 
-function addNewBook() {
+function addNewBook () {
     library.unshift(new Book(
-        titleInput.value, 
-        authorInput.value, 
-        pagesInput.value, 
+        titleInput.value,
+        authorInput.value,
+        pagesInput.value,
         readInput.checked
-        )
+    )
     );
 }
 
-const addBook = document.querySelector('.add-book'),
-addBookModal = document.querySelector('.add-book-modal');
+const addBook = document.querySelector('main>button'),
+    addBookModal = document.querySelector('.add-book-modal');
 
 addBook.onclick = openModal;
 
@@ -32,33 +39,47 @@ function openModal () {
 }
 function closeModal () {
     addBookModal.classList.remove('active');
+    resetInput();
+}
+document.onkeydown = (e) => {
+    if (e.code === 'Escape') {
+        closeModal();
+    }
 }
 
-document.addEventListener('click', (e) => {
-    if(e.target.matches('.add-book-modal')){
+document.addEventListener('mousedown', (e) => {
+    if (e.target.matches('.add-book-modal') && e.button === 0) {
         closeModal();
     }
 })
 
 const titleInput = document.querySelector('#title-input'),
-authorInput = document.querySelector('#author-input'),
-pagesInput = document.querySelector('#pages-input'),
-readInput = document.querySelector('#read-input'),
-submit = document.querySelector('#submit-input');
+    authorInput = document.querySelector('#author-input'),
+    pagesInput = document.querySelector('#pages-input'),
+    readInput = document.querySelector('#read-input'),
+    submit = document.querySelector('#submit-input');
 
 submit.addEventListener('click', (e) => {
-    if (titleInput.value !== '' && authorInput.value !== '' && pagesInput.value !== ''){
+    if (titleInput.value !== '' && authorInput.value !== '' && pagesInput.value !== '') {
         e.preventDefault();
+        resetLibrary();
         addNewBook();
-        displayBookCards();
-        
+        createAndDisplayCards();
+        closeModal();
     }
 })
 
+function resetInput () {
+    titleInput.value = '';
+    authorInput.value = '';
+    pagesInput.value = '';
+    readInput.checked = false;
+}
+
 const libraryGrid = document.querySelector('.library-grid');
 
-function displayBookCards() {
-    for(book of library){
+function createAndDisplayCards () {
+    for (book of library) {
         const title = document.createElement('div');
         const author = document.createElement('div');
         const pages = document.createElement('div');
@@ -76,10 +97,22 @@ function displayBookCards() {
         pages.innerText = `${book.pageNum} Pages`;
         finished.innerText = book.isFinished ? 'Finished' : 'Reading';
         remove.innerText = 'Remove';
+        finished.onclick = book.toggleIsFinished(finished);
+        card.dataset.index = library.length;
+        remove.onclick = () => {
+            card.remove();
+            library.splice()
+        }
         libraryGrid.append(card);
         card.append(title, author, pages, finished, remove);
     }
 }
 
-displayBookCards();
+function resetLibrary () {
+    const books = libraryGrid.querySelectorAll('div')
+    for (book of books) {
+        book.remove();
+    }
+}
 
+createAndDisplayCards();
