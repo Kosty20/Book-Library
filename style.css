@@ -99,23 +99,24 @@ main>button:active {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.book-card>div:not(.remove) {
-    margin: 12px;
-    width: fit-content;
-    border-bottom: 3px solid var(--beige);
+    flex: 1;
 }
 .remove {
-    height: 40px;
-    width: 60%;
-    margin: auto;
+    width: 100%;
     cursor: pointer;
-    border-radius: 10px;
 }
 .remove:active {
     background-color: red;
 }
-
+.read {
+    width: 40%;
+    background-color: var(--crayon);
+    color: var(--beige);
+    border-radius: 10px;
+}
+.read.finished {
+    color: var(--fade-green);
+}
 .title {
     width: 100% !important;
     margin: 0 !important;

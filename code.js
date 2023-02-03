@@ -28,7 +28,7 @@ function addNewBook () {
 }
 
 const addBook = document.querySelector('main>button'),
-    addBookModal = document.querySelector('.add-book-modal');
+addBookModal = document.querySelector('.add-book-modal');
 
 addBook.onclick = openModal;
 
@@ -89,6 +89,9 @@ function createAndDisplayCards () {
         author.classList.add('author');
         pages.classList.add('pages');
         finished.classList.add('read');
+        if(book.isFinished){
+            finished.classList.add('finished');
+        }
         remove.classList.add('remove');
         card.classList.add('book-card');
 
@@ -99,7 +102,13 @@ function createAndDisplayCards () {
         remove.innerText = 'Remove';
 
         finished.addEventListener('click', () => {
-            book.toggleIsFinished() ? finished.innerText = 'Finished' : finished.innerText = 'Reading'
+            if (book.toggleIsFinished()){
+                finished.innerText = 'Finished';
+                finished.classList.add('finished');
+            } else {
+                finished.innerText = 'Reading'
+                finished.classList.remove('finished');
+            }
         }) 
         remove.addEventListener('click', () => {
             card.remove();
