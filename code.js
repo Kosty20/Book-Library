@@ -98,15 +98,14 @@ function createAndDisplayCards () {
         finished.innerText = book.isFinished ? 'Finished' : 'Reading';
         remove.innerText = 'Remove';
 
-        finished.onclick = () => 
-        book.toggleIsFinished() ? 
-        finished.innerText = 'Finished' : 
-        finished.innerText = 'Reading'
-        card.dataset.index = library.length;
-        remove.onclick = () => {
+        finished.addEventListener('click', () => {
+            book.toggleIsFinished() ? finished.innerText = 'Finished' : finished.innerText = 'Reading'
+        }) 
+        remove.addEventListener('click', () => {
             card.remove();
-            library.splice()
-        }
+            library.splice(library.indexOf(book), 1);
+        })
+        
         libraryGrid.append(card);
         card.append(title, author, pages, finished, remove);
     })
