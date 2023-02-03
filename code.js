@@ -1,4 +1,4 @@
-
+/* The Library */
 let library = [
     new Book('Title', 'Author', 300, true),
     new Book('My Title', 'My Author', 200, false)
@@ -18,17 +18,9 @@ Book.prototype.toggleIsFinished = function () {
     }
 }
 
-function addNewBook () {
-    library.unshift(new Book(
-        titleInput.value,
-        authorInput.value,
-        pagesInput.value,
-        readInput.checked
-    ));
-}
-
+/* Modal */
 const addBook = document.querySelector('main>button'),
-addBookModal = document.querySelector('.add-book-modal');
+addBookModal = document.querySelector('.new-book-modal');
 
 addBook.onclick = openModal;
 
@@ -44,18 +36,18 @@ document.onkeydown = (e) => {
         closeModal();
     }
 }
-
 document.addEventListener('mousedown', (e) => {
-    if (e.target.matches('.add-book-modal') && e.button === 0) {
+    if (e.target.matches('.new-book-modal') && e.button === 0) {
         closeModal();
     }
 })
 
+/* Input Handling */
 const titleInput = document.querySelector('#title-input'),
-    authorInput = document.querySelector('#author-input'),
-    pagesInput = document.querySelector('#pages-input'),
-    readInput = document.querySelector('#read-input'),
-    submit = document.querySelector('#submit-input');
+authorInput = document.querySelector('#author-input'),
+pagesInput = document.querySelector('#pages-input'),
+readInput = document.querySelector('#read-input'),
+submit = document.querySelector('#submit-input');
 
 submit.addEventListener('click', (e) => {
     if (titleInput.value !== '' && authorInput.value !== '' && pagesInput.value !== '') {
@@ -66,12 +58,19 @@ submit.addEventListener('click', (e) => {
         closeModal();
     }
 })
-
 function resetInput () {
     titleInput.value = '';
     authorInput.value = '';
     pagesInput.value = '';
     readInput.checked = false;
+}
+function addNewBook () {
+    library.unshift(new Book(
+        titleInput.value,
+        authorInput.value,
+        pagesInput.value,
+        readInput.checked
+    ));
 }
 
 const libraryGrid = document.querySelector('.library-grid');
@@ -120,10 +119,6 @@ function createAndDisplayCards () {
     })
 }
 
-function toggleIsFinished() {
-    
-}
-
 function resetLibrary () {
     const books = libraryGrid.querySelectorAll('div')
     for (book of books) {
@@ -131,4 +126,5 @@ function resetLibrary () {
     }
 }
 
-createAndDisplayCards();
+
+window.onload = createAndDisplayCards;

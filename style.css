@@ -48,7 +48,12 @@ header {
     display: flex;
     align-items: center;
 }
-
+header>img{
+    aspect-ratio: 1;
+    width: 60px;
+    margin-right: 10px;
+    top: -10px;
+}
 h1 {
     width: fit-content;
     color: var(--beige);
@@ -110,16 +115,19 @@ main>button:active {
 }
 .read {
     width: 40%;
+    margin-bottom: 10px;
     background-color: var(--crayon);
     color: var(--beige);
     border-radius: 10px;
+    cursor: pointer;
 }
 .read.finished {
     color: var(--fade-green);
+    background-color: transparent;
+    outline: 3px solid var(--fade-green);
 }
 .title {
-    width: 100% !important;
-    margin: 0 !important;
+    width: 100%;
     padding: 10px;
     color: var(--beige);
 }
@@ -131,24 +139,29 @@ main>button:active {
     border-radius: 5px;
     font-size: 0.9rem;
     color: var(--beige);
+    z-index: 1;
+}
+.author{
+    background-color: var(--beige);
+    width: 100%;
 }
 
 
-.add-book-modal {
+.new-book-modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
-    display: none;
     z-index: 100;
 }
-.add-book-modal.active {
+.new-book-modal.active {
     display: flex;
 }
 
-.add-book-form {
+form {
     width: 300px;
     height: 400px;
     margin: auto;
@@ -162,7 +175,7 @@ main>button:active {
     align-items: center;
     justify-content: space-between;
 }
-.add-book-form>div {
+form>div {
     width: 100%;
     text-align: center;
     font-size: 1.5rem;
@@ -170,7 +183,6 @@ main>button:active {
     color: var(--beige);
     border-bottom: 5px solid var(--fade-green);
 }
-
 #title-input,
 #author-input,
 #pages-input {
@@ -183,7 +195,6 @@ main>button:active {
     border: none;
     outline: none;
 }
-
 #title-input:focus-visible,
 #author-input:focus-visible,
 #pages-input:focus-visible {
